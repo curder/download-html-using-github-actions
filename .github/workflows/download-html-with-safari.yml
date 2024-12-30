@@ -12,6 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Enable JavaScript from Apple Events in Safari
+        run: |
+          #!/bin/bash
+          defaults write com.apple.Safari IncludeDevelopMenu -bool true
+          defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanAccessClipboard -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanExecuteInMainFrame -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanExecuteInSubframes -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanExecuteInPlugins -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool true
+          defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanAccessClipboard -bool true
+          killall Safari # 重启Safari使设置生效
+
       - name: Download HTML with Safari
         run: |
           #!/bin/bash
