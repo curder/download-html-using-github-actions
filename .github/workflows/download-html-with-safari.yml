@@ -12,6 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Ensure Safari is running
+        run: |
+          #!/bin/bash
+          open -a Safari
+          sleep 5 # 等待Safari启动
+
       - name: Enable JavaScript from Apple Events in Safari
         run: |
           #!/bin/bash
