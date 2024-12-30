@@ -12,19 +12,28 @@ jobs:
 
       - name: Download HTML with Safari
         run: |
-          #!/usr/bin/osascript
+          #!/bin/bash
+          # 将AppleScript保存到一个临时文件
+          echo '
           tell application "Safari"
-              activate
-              open location "https://www.avatrade.com.tw/trading-info/cfd-rollover-dates" # 替换为你要访问的网址
-              delay 5 # 等待页面加载，这里可能需要调整等待时间
-              tell window 1
-                  set current tab to first tab
-                  set HTMLSource to do JavaScript "document.documentElement.outerHTML" in current tab
-              end tell
-              do shell script "echo " & quoted form of HTMLSource & " > cfd-rollover-dates.html"
-              close current tab
-              quit
+          activate
+          open location "https://www.avatrade.com.tw/trading-info/cfd-rollover-dates" # 替换为你要访问的网址
+          delay 5 # 等待页面加载，这里可能需要调整等待时间
+          tell window 1
+          set current tab to first tab
+          set HTMLSource to do JavaScript "document.documentElement.outerHTML" in current tab
           end tell
+          do shell script "echo " & quoted form of HTMLSource & " > downloaded.html"
+          close current tab
+          quit
+          end tell
+          ' > script.scpt
+
+          # 执行AppleScript
+          osascript script.scpt
+
+          # 删除临时文件
+          rm script.scpt
 
       - name: Upload HTML as artifact
         uses: actions/upload-artifact@v4
