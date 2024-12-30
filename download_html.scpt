@@ -1,6 +1,6 @@
 tell application "Safari"
   activate
-  open location "https://test.ah-site.cn"
+  open location "https://www.google.com.hk"
   delay 5 # 等待页面开始加载
   tell window 1
     set current tab to first tab
