@@ -15,7 +15,7 @@ jobs:
       - name: get Ip address
         run: |
           #!/bin/bash
-          ip=curl -s ifconfig.me
+          ip=$(curl -s ifconfig.me)
           echo "current machine ip address: $ip"
           
 
