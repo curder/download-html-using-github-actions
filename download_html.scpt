@@ -1,7 +1,7 @@
 tell application "Safari"
   activate
   open location "https://test.ah-site.cn"
-  delay 60 # 等待页面开始加载
+  delay 5 # 等待页面开始加载
   tell window 1
     set current tab to first tab
     set HTMLSource to do JavaScript "
