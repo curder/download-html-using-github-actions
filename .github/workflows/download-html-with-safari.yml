@@ -41,6 +41,7 @@ jobs:
 
       - name: Download HTML with Safari
         run: |
+          open -a Safari
           #!/bin/bash
           # 执行AppleScript
           osascript download_html.scpt
