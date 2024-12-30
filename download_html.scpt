@@ -1,6 +1,6 @@
 tell application "Safari"
   activate
-  open location "https://www.avatrade.com.tw/trading-info/cfd-rollover-dates"
+  open location "https://test.ah-site.cn"
   delay 60 # 等待页面开始加载
   tell window 1
     set current tab to first tab
