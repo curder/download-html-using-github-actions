@@ -33,7 +33,6 @@ jobs:
         run: |
           chmod +x fetch_html.sh
           sudo chown -R $USER:$USER .
-          cat cfd-rollover-dates.html
 
       - name: Run Bash script to fetch HTML
         id: fetch
@@ -46,5 +45,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update cfd-rollover-dates.html file"
+          branch: cfd-rollover-dates
           push_options: --force
 
