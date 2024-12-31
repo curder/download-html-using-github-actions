@@ -30,30 +30,17 @@ jobs:
           chmod +x fetch_html.sh
           sudo chown -R $USER:$USER .
 
-      - name: Configure Git
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: cfd-rollover-dates.html
 
-      - name: Run Bash script to fetch HTML
-        id: fetch
-        env:
-          URL: ${{ github.event.inputs.url }}
-          FILE_NAME: ${{ github.event.inputs.file_name }}
-        run: |
-          ./fetch_html.sh
-
-      - name: Commit and Push to New Branch
-        if: always()
-        run: |
-          # 创建新的分支
-          git checkout -b cfd-rollover-dates
-          
-          # 添加文件到暂存区
-          git add $FILE_NAME
-          
-          # 提交更改
-          git commit -m "Update HTML content"
-          
-          # 推送新分支到远程仓库
-          git push origin cfd-rollover-dates --force
+  # Deployment job
+  deploy:
+    needs: fetch-html
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
