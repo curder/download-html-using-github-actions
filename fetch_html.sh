@@ -2,7 +2,7 @@
 
 # 定义URL变量
 URL='https://www.avatrade.com.tw/trading-info/cfd-rollover-dates'
-FILE_NAME = 'cfd-rollover-dates.html'
+FILE_NAME='cfd-rollover-dates.html'
 
 # 定义命令数组
 commands=(

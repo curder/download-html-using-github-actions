@@ -41,5 +41,5 @@ jobs:
         env:
           FILE_NAME: ${{ github.event.inputs.file_name }}
         with:
-          name: ${{env.FILE_NAME}}
-          path: ${{env.FILE_NAME}}
+          name: ${{ env.FILE_NAME }}
+          path: ${{ env.FILE_NAME }}
