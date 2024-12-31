@@ -26,7 +26,9 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Make script executable
-        run: chmod +x fetch_html.sh
+        run: |
+          chmod +x fetch_html.sh
+          sudo chown -R $USER:$USER .
 
       - name: Run Bash script to fetch HTML
         id: fetch
