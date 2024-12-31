@@ -30,6 +30,11 @@ jobs:
           chmod +x fetch_html.sh
           sudo chown -R $USER:$USER .
 
+      - name: Configure Git
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
       - name: Run Bash script to fetch HTML
         id: fetch
         env:
