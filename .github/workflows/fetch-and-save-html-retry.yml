@@ -29,7 +29,7 @@ jobs:
           URL: ${{ github.event.inputs.url }}
         run: |
           ./fetch_html.sh
-          echo "::set-output name=html::$(cat cfd-rollover-dates.html | base64 -w 0)"
+          echo "HTML=$(cat cfd-rollover-dates.html | base64 -w 0)" >> $GITHUB_OUTPUT
 
       - name: Upload HTML as artifact
         uses: actions/upload-artifact@v4
