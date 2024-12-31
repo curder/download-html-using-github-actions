@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # 定义URL变量
-URL="https://www.wikipedia.org"
+URL='https://www.avatrade.com.tw/trading-info/cfd-rollover-dates'
+
 # 定义命令数组
 commands=(
     "lwthiker/curl-impersonate:0.6-chrome curl_chrome99"
