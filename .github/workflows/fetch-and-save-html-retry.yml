@@ -37,12 +37,8 @@ jobs:
           FILE_NAME: ${{ github.event.inputs.file_name }}
         run: |
           ./fetch_html.sh
-          if [ -f "$FILE_NAME" ]; then
-            echo "HTML=$(cat $FILE_NAME | base64 -w 0)" >> $GITHUB_OUTPUT
-          else
-            echo "Failed to fetch or save HTML content."
-            exit 1
-          fi
+          echo "HTML=$(cat $FILE_NAME | base64 -w 0)"
+          echo "HTML=$(cat $FILE_NAME | base64 -w 0)" >> $GITHUB_OUTPUT
 
       - name: Upload HTML as artifact
         uses: actions/upload-artifact@v4

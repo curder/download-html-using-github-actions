@@ -33,7 +33,7 @@ commands=(
 fetch_html() {
     local command=$1
     local output=$(docker run --rm $command $URL)
-    echo "$output" > './' + $FILE_NAME
+    echo "$output" > "$FILE_NAME"
     echo "Content retrieved from $URL using $command"
     echo "HTML content saved to $FILE_NAME"
     return $(echo "$output" | grep -c 'Just a moment...')
