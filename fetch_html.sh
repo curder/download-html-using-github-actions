@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 
 # 定义URL变量
