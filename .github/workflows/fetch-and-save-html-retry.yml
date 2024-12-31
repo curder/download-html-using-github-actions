@@ -46,5 +46,6 @@ jobs:
         with:
           commit_message: "Update cfd-rollover-dates.html file"
           branch: cfd-rollover-dates
+          create_branch: true
           push_options: --force
 
