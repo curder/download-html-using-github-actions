@@ -37,11 +37,18 @@ jobs:
           FILE_NAME: ${{ github.event.inputs.file_name }}
         run: |
           ./fetch_html.sh
-          echo "HTML=$(cat $FILE_NAME | base64 -w 0)"
-          echo "HTML=$(cat $FILE_NAME | base64 -w 0)" >> $GITHUB_OUTPUT
 
-      - name: Upload HTML as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact
-          path: cfd-rollover-dates.html
+      - name: Commit and Push to New Branch
+        if: always()
+        run: |
+          # 创建新的分支
+          git checkout -b cfd-rollover-dates
+          
+          # 添加文件到暂存区
+          git add $FILE_NAME
+          
+          # 提交更改
+          git commit -m "Update HTML content"
+          
+          # 推送新分支到远程仓库
+          git push origin cfd-rollover-dates --force
