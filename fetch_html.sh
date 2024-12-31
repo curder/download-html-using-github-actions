@@ -2,6 +2,7 @@
 
 # 定义URL变量
 URL='https://www.avatrade.com.tw/trading-info/cfd-rollover-dates'
+FILE_NAME = 'cfd-rollover-dates.html'
 
 # 定义命令数组
 commands=(
@@ -29,7 +30,7 @@ commands=(
 fetch_html() {
     local command=$1
     local output=$(docker run --rm $command $URL)
-    echo "$output" > fetched_html.html
+    echo "$output" > $FILE_NAME
     return $(echo "$output" | grep -c '<title>Just a moment...</title>')
 }
 

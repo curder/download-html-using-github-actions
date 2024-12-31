@@ -10,6 +10,10 @@ on:
         description: 'URL to fetch'
         required: true
         default: 'https://www.avatrade.com.tw/trading-info/cfd-rollover-dates'
+      file_name:
+        description: 'File name to save'
+        required: true
+        default: 'cfd-rollover-dates.html'
 jobs:
   fetch-html:
     runs-on: ubuntu-latest
@@ -27,12 +31,15 @@ jobs:
         id: fetch
         env:
           URL: ${{ github.event.inputs.url }}
+          FILE_NAME: ${{ github.event.inputs.file_name }}
         run: |
           ./fetch_html.sh
-          echo "HTML=$(cat cfd-rollover-dates.html | base64 -w 0)" >> $GITHUB_OUTPUT
+          echo "HTML=$(cat $FILE_NAME | base64 -w 0)" >> $GITHUB_OUTPUT
 
       - name: Upload HTML as artifact
         uses: actions/upload-artifact@v4
+        env:
+          FILE_NAME: ${{ github.event.inputs.file_name }}
         with:
-          name: cfd-rollover-dates
-          path: cfd-rollover-dates.html
+          name: ${{env.FILE_NAME}}
+          path: ${{env.FILE_NAME}}
