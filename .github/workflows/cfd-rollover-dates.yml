@@ -3,8 +3,7 @@ name: Fetch and Save HTML with Retry
 on:
   push: # 每次代码提交触发
   schedule:
-#    - cron: '0 * * * *' # 每小时执行一次
-    - cron: '*/1 * * * *' # 每分钟执行一次
+    - cron: '0 * * * *' # 每小时执行一次
   workflow_dispatch:
     inputs:
       url:
