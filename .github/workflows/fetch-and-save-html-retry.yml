@@ -30,17 +30,19 @@ jobs:
           chmod +x fetch_html.sh
           sudo chown -R $USER:$USER .
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: cfd-rollover-dates.html
-
-  # Deployment job
   deploy:
+    runs-on: ubuntu-24.04
     needs: fetch-html
-    runs-on: ubuntu-latest
-    name: Deploy
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Update HTML file cfd-rollover-dates.html $(date "+%Y-%m-%d %H:%M:%S")"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
