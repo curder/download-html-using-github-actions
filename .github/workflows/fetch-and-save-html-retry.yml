@@ -21,7 +21,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+        with:
+          # personal access token
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -30,19 +32,18 @@ jobs:
           chmod +x fetch_html.sh
           sudo chown -R $USER:$USER .
 
-  deploy:
-    runs-on: ubuntu-24.04
-    needs: fetch-html
-    steps:
-      - name: Commit files
+      # 配置 git
+      - name: config git
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          git commit -m "Update HTML file cfd-rollover-dates.html $(date "+%Y-%m-%d %H:%M:%S")"
+          git config --global user.email "q.curder@gmail.com"
+          git config --global user.name "Curder"
+      # 或者使用 git 命令
+      - name: check for changes
+        run: git status
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git commit -m "update by github actions"
+      - name: push code to master
+        run: git push origin master
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
