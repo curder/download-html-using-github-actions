@@ -40,6 +40,8 @@ jobs:
           URL: ${{ github.event.inputs.url }}
           FILE_NAME: ${{ github.event.inputs.file_name }}
         run: |
+          IP=$(curl 'https://ipinfo.io/ip')
+          echo "Current IP address: $IP"
           ./fetch_html.sh
 
       - uses: stefanzweifel/git-auto-commit-action@v5
